@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <title>Crystal Game</title>
+    <link rel="stylesheet" type="text/css" href="CSS.StyleSheet.css">
+</head>
+<body>
+        <div class="container header">
+                <div class="row">
+                  <div class="col-lg-5 crystals">
+                    <p class="name">Crystals Collector!</p>
+                  </div>
+                  <div class="col-lg-7 name">
+                  </div>
+                </div>
+            </div>
+            
+            
+            <div class="row">
+                  
+                  <div class="col-lg-1 ">
+                    
+                  </div>
+                  <div class="col-lg-10 paragraphs">
+           
+                  </div>
+                  <div class="col-lg-1 ">
+                  </div>
+                </div>
+            
+              <div class="row">
+                <div class="col-lg-6 thirtyfour">
+                  <p>34</p>
+                </div>
+            
+                <div class="col-lg-2 youlost">
+                  <p>You Lost!</p>
+                  <p>Wins: 1</p>
+                  <p>Losses: 1</p>
+                </div>
+            
+                <div class="col-lg-4 ">
+                </div>
+                
+              </div>
+            
+            
+              <div class="row">
+            
+                <div class="col-lg-3 gems">
+                  <img src="assets/images/download-1.jpg" alt="">
+                </div>
+            
+                <div class="col-lg-3 gems">
+                  <img src="images/download.jpg" alt="">
+                </div>
+            
+                <div class="col-lg-3 gems">
+                  <img src="images/images-1.jpg" alt="">
+                </div>
+            
+                <div class="col-lg-3 gems">
+                  <img src="images/images.jpg" alt="">
+                </div>
+                
+              </div>
+            
+            
+              <div class="row">
+            
+                <div class="col-lg-4 totalscore">
+                  <p>Yout total score is:</p>
+                </div>
+            
+                <div class="col-lg-8 ">
+                </div>
+              </div>
+            
+            
+                <div class="row">
+            
+                <div class="col-lg-4 score">
+                  <p>0</p>
+                </div>
+            
+                <div class="col-lg-8 ">
+                </div>
+              </div>
+            
+            
+            
+            
+            
+            
+            
+            
+    <div id="game">
+        <h1> Crystal Game </h1>
+
+        <button id="1" class="crystal">
+            <img src="images/download-1.jpg" alt="1" />
+        </button>
+        <button id="2" class="crystal">
+            <img src="#" alt="2" />
+        </button>
+        <button id="3" class="crystal">
+            <img src="#" alt="3" />
+        </button>
+        <button id="4" class="crystal">
+            <img src="#" alt="4" />
+        </button>
+
+        <p>Magic Number: <strong id="magicNumberIndicator"></strong></p>
+        <p>Wins: <strong id="winsIndicator">0</strong></p>
+        <p>Losses:<strong id="lossesIndicator">0</strong></p>
+        <p>Your total Score is <strong id="totalScoreIndicator">0</strong></p>
+    </div>
+
+
+    <script type="text/javascript">
+        var wins = 0;
+        var losses = 0;
+        var totalScore = 0;
+
+        var magicNumberIndicator = document.getElementById('magicNumberIndicator')
+        var winsIndicator = document.getElementById('winsIndicator');
+        var lossesIndicator = document.getElementById('lossesIndicator');
+        var totalScoreIndicator = document.getElementById('totalScoreIndicator');
+
+        var button1 = document.getElementById('1');
+        var button2 = document.getElementById('2');
+        var button3 = document.getElementById('3');
+        var button4 = document.getElementById('4');
+
+        var magicNum;
+        var button1Value;
+        var button2Value;
+        var button3Value;
+        var button4Value;
+
+        setupGame();
+
+        button1.addEventListener('click', function() {
+            totalScore += button1Value;
+            checkScoreVsMagicNum()
+            console.log(totalScore);
+        })
+        button2.addEventListener('click', function() {
+            totalScore += button2Value;
+            checkScoreVsMagicNum()
+            console.log(totalScore);
+        })
+        button3.addEventListener('click', function() {
+            totalScore += button3Value;
+            checkScoreVsMagicNum()
+            console.log(totalScore);
+        })
+        button4.addEventListener('click', function() {
+            totalScore += button4Value;
+            checkScoreVsMagicNum()
+            console.log(totalScore);
+        })
+        
+        // Helper functions
+
+        function setupGame() {
+            magicNum = getRandomInRange(19, 120);
+            magicNumberIndicator.innerText = magicNum;
+
+            button1Value = getRandomInRange(1, 12);
+            button2Value = getRandomInRange(1, 12);
+            button3Value = getRandomInRange(1, 12);
+            button4Value = getRandomInRange(1, 12);
+        }
+
+        function getRandomInRange(min, max) {
+            return Math.floor(Math.random() * (max - min) + min);
+        }
+
+        function checkScoreVsMagicNum() {
+            if (totalScore === magicNum) {
+                wins++;
+                winsIndicator.innerText = wins;
+                resetGame();
+            } else if (totalScore > magicNum) {
+                console.log('LOSS CONDITION')
+                losses++;
+                lossesIndicator.innerText = losses;
+                resetGame();
+            } else {
+                totalScoreIndicator.innerText = totalScore;
+            }
+        }
+
+        function resetGame() {
+            console.log('RESET GAME');
+            totalScore = 0; // set user's score back to 0 for next game
+            totalScoreIndicator.innerText = totalScore;
+            setupGame();
+        }
+    </script>
+   
+</body>
+
+
+</html>
